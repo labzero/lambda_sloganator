@@ -1,7 +1,5 @@
 'use strict';
 
-console.log('Loading function');
-
 var sloganText = `Let the {} begin!
 {}, enter a different World.
 {}, People Rule!
