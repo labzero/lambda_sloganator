@@ -1,5 +1,7 @@
 'use strict';
 
+console.log('Loading function');
+
 var sloganText = `Let the {} begin!
 {}, enter a different World.
 {}, People Rule!
@@ -59,12 +61,17 @@ exports.handler = (event, context, callback) => {
             'Content-Type': 'application/json',
         },
     });
-
-    if( event.queryStringParameters && event.queryStringParameters["q"]) {
+    if( event.queryStringParameters && event.queryStringParameters.q) {
         var template = slogans[Math.floor(Math.random() * slogans.length)];
-        done(null, template.replace("{}", event.queryStringParameters["q"]).capitalize());
+        var slogan;
+        var parts = template.split("{}");
+        if(parts.length === 0) {
+            slogan = event.queryStringParameters["q"] + parts[0]
+        } else {
+            slogan = parts[0] + event.queryStringParameters.q + parts[1]
+        }
+        done(null, slogan.capitalize());
     } else {
         done(new Error("Missing required parameter. Tell me what to sloganate using ?q=term"))
     }
 };
-
