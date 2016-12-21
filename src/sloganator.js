@@ -64,7 +64,7 @@ exports.handler = (event, context, callback) => {
         var slogan;
         var parts = template.split("{}");
         if(parts.length === 0) {
-            slogan = event.queryStringParameters["q"] + parts[0]
+            slogan = event.queryStringParameters.q + parts[0]
         } else {
             slogan = parts[0] + event.queryStringParameters.q + parts[1]
         }
