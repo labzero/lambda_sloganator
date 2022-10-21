@@ -1,0 +1,46 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: sloganator
+  description: Generate slogans
+spec:
+  type: openapi
+  lifecycle: production
+  owner: engineering
+  definition: |
+    openapi: 3.0.1
+    info:
+      title: lambda-slogantor
+      description: Generate slogans
+      version: "0.1"
+    servers:
+    - url: https://4krgs6alv6.execute-api.us-west-2.amazonaws.com
+    paths:
+      /prod/slogan:
+        get:
+          description: Generate slogan based on query
+          parameters:
+          - name: q
+            in: query
+            required: true
+            style: form
+            explode: true
+            schema:
+              type: string
+            example: APIs
+          responses:
+            "200":
+              description: The generated slogan
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties: {}
+                  examples:
+                    "0":
+                      value: '"APIs isn''t a spaceship. It''s a time machine."'
+          servers:
+          - url: https://4krgs6alv6.execute-api.us-west-2.amazonaws.com
+        servers:
+        - url: https://4krgs6alv6.execute-api.us-west-2.amazonaws.com
+    components: {}
